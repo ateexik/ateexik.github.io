@@ -708,6 +708,17 @@ setInterval(render, 20000);
 // ---------- štart ----------
 
 (async function start() {
+  // config.js sa upravuje ručne — preklep v ňom nesmie potichu zapnúť demo režim
+  const configError = !window.FAKETAXI_CONFIG
+    ? "Súbor config.js má v sebe chybu (najčastejšie chýbajúca čiarka alebo zátvorka), preto sa nenačítal. Oprav ho podľa README."
+    : CFG.firebase && !CFG.firebase.databaseURL
+      ? "V config.js chýba databaseURL. Skopíruj ju z Firebase (Realtime Database → Data, adresa hore)."
+      : null;
+  if (configError) {
+    state.error = configError;
+    render();
+    return;
+  }
   render();
   try {
     store = CFG.firebase ? await firebaseStore(CFG.firebase) : localStore();
