@@ -1,0 +1,31 @@
+{
+  "rules": {
+    "days": {
+      ".read": true,
+      "$date": {
+        ".write": "$date.matches(/^20[0-9][0-9]-[01][0-9]-[0-3][0-9]$/)",
+        "seats": {
+          "$seat": {
+            ".validate": "$seat.matches(/^s[1-8]$/) && newData.hasChildren(['name', 'device', 'ts'])",
+            "name": { ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 48" },
+            "device": { ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 64" },
+            "ts": { ".validate": "newData.isNumber()" },
+            "$other": { ".validate": false }
+          }
+        },
+        "waitlist": {
+          "$entry": {
+            ".validate": "$entry.matches(/^w[0-9a-z]+$/) && newData.hasChildren(['name', 'device', 'ts'])",
+            "name": { ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 48" },
+            "device": { ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 64" },
+            "ts": { ".validate": "newData.isNumber()" },
+            "$other": { ".validate": false }
+          }
+        },
+        "cancelled": { ".validate": "newData.isBoolean()" },
+        "note": { ".validate": "newData.isString() && newData.val().length <= 280" },
+        "$other": { ".validate": false }
+      }
+    }
+  }
+}

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>FakeTaxi Kučera</title>
+  <meta name="description" content="Rezervácia miest v aute na ranné jazdy do školy.">
+  <meta name="theme-color" content="#FFC20E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🚕%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <script src="config.js"></script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <span class="roof-sign">TAXI</span>
+      <h1><span class="brand-fake">Fake</span>Taxi <span class="brand-name">Kučera</span></h1>
+    </div>
+    <div id="who"></div>
+  </header>
+  <div class="checker" aria-hidden="true"></div>
+
+  <main>
+    <div id="banner"></div>
+    <nav id="days" class="days" aria-label="Výber dňa"></nav>
+    <section id="day" class="card"></section>
+    <div id="driver"></div>
+    <section id="stats" class="card"></section>
+  </main>
+
+  <footer class="foot">
+    <span>🚕 FakeTaxi Kučera · jazdíme spolu do školy</span>
+    <button class="link" type="button" data-action="driver-login">🔑 Režim šoféra</button>
+  </footer>
+
+  <dialog id="nameDialog">
+    <form method="dialog" class="dialog">
+      <h2>Kto si? 👋</h2>
+      <p class="muted">Meno uvidia ostatní pri tvojom sedadle. Zapamätáme si ho v tomto telefóne.</p>
+      <input name="name" maxlength="24" autocomplete="nickname" placeholder="napr. Peťo" required>
+      <div class="dialog-actions">
+        <button class="btn ghost" value="cancel" formnovalidate>Zrušiť</button>
+        <button class="btn primary" value="ok">Uložiť</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="pinDialog">
+    <form method="dialog" class="dialog">
+      <h2>🔑 Režim šoféra</h2>
+      <p class="muted">Šofér môže zrušiť jazdu, nechať odkaz, posadiť alebo vyhodiť pasažiera.</p>
+      <input name="pin" type="password" inputmode="numeric" autocomplete="off" placeholder="PIN" required>
+      <p class="dialog-error" hidden>Zlý PIN.</p>
+      <div class="dialog-actions">
+        <button class="btn ghost" value="cancel" formnovalidate>Zrušiť</button>
+        <button class="btn primary" value="ok">Vstúpiť</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
